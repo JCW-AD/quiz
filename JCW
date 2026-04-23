@@ -1,0 +1,284 @@
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+#jcw-quiz *{box-sizing:border-box;margin:0;padding:0;}
+#jcw-quiz{background:#fffbf0;color:#14214b;font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;padding:2rem 1rem 4rem;}
+#jcw-quiz .wrap{max-width:640px;margin:0 auto;}
+#jcw-quiz .hdr{text-align:center;padding:2.5rem 2rem 2rem;margin-bottom:2rem;border-bottom:1px solid #e8e0cc;position:relative;}
+#jcw-quiz .hdr-rule{width:48px;height:2px;background:#f8d97e;margin:0 auto 1.25rem;}
+#jcw-quiz .hdr-eyebrow{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#8b4513;margin-bottom:0.75rem;}
+#jcw-quiz .hdr-title{font-family:'EB Garamond',Georgia,serif;font-size:2rem;font-weight:400;color:#14214b;line-height:1.25;margin-bottom:0.6rem;}
+#jcw-quiz .hdr-sub{font-size:14px;font-weight:300;color:#524941;letter-spacing:0.01em;}
+#jcw-quiz .prog-wrap{margin-bottom:2rem;}
+#jcw-quiz .prog-meta{display:flex;justify-content:space-between;font-size:13px;font-weight:500;color:#524941;margin-bottom:8px;letter-spacing:0.03em;}
+#jcw-quiz .prog-track{height:2px;background:#e8e0cc;border-radius:1px;overflow:hidden;}
+#jcw-quiz .prog-fill{height:100%;background:#f8d97e;border-radius:1px;transition:width 0.5s cubic-bezier(.4,0,.2,1);}
+#jcw-quiz .qcard{background:white;border:1px solid #e8e0cc;border-radius:2px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(20,33,75,0.04);}
+#jcw-quiz .qnum{font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#0a7a96;margin-bottom:0.75rem;}
+#jcw-quiz .qtext{font-family:'EB Garamond',Georgia,serif;font-size:1.2rem;font-weight:400;color:#073c81;line-height:1.55;margin-bottom:1.5rem;}
+#jcw-quiz .alist{display:flex;flex-direction:column;gap:10px;}
+#jcw-quiz .abtn{display:block;width:100%;text-align:left;padding:14px 18px;background:#fffbf0;border:1px solid #e8e0cc;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:#073c81;cursor:pointer;transition:all 0.2s ease;line-height:1.5;position:relative;}
+#jcw-quiz .abtn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:#f8d97e;border-radius:2px 0 0 2px;transition:width 0.2s ease;}
+#jcw-quiz .abtn:hover{background:#f4f7fd;border-color:#073c81;color:#14214b;padding-left:22px;}
+#jcw-quiz .abtn.sel{background:#f4f7fd;border-color:#073c81;color:#14214b;font-weight:400;padding-left:22px;}
+#jcw-quiz .abtn.sel::before{width:3px;}
+#jcw-quiz .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+#jcw-quiz .btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:11px 24px;border-radius:2px;cursor:pointer;transition:all 0.2s ease;letter-spacing:0.03em;}
+#jcw-quiz .btn-ghost{background:transparent;border:1px solid #e8e0cc;color:#524941;}
+#jcw-quiz .btn-ghost:hover{border-color:#524941;color:#14214b;}
+#jcw-quiz .btn-primary{background:#14214b;border:1px solid #14214b;color:#fffbf0;}
+#jcw-quiz .btn-primary:hover{background:#073c81;border-color:#073c81;}
+#jcw-quiz .btn-primary:disabled{opacity:0.3;cursor:not-allowed;}
+#jcw-quiz .disc-box{border:1px solid #e8e0cc;border-left:3px solid #f8d97e;padding:0.9rem 1.1rem;margin-bottom:1.75rem;background:white;}
+#jcw-quiz .disc-text{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:#524941;font-style:italic;line-height:1.6;}
+#jcw-quiz .rcard{border-radius:2px;padding:2.25rem;margin-bottom:1.75rem;border:1px solid #e8e0cc;}
+#jcw-quiz .rcard.th{background:#f4f7fd;border-color:#d8e4f5;}
+#jcw-quiz .rcard.tw{background:#f7ede4;border-color:#e8cfc3;}
+#jcw-quiz .rcard.tf{background:#f3f7fe;border-color:#ccddf5;}
+#jcw-quiz .r-identity-block{margin-bottom:1.35rem;}
+#jcw-quiz .r-identity-line{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#8b4513;line-height:1.65;letter-spacing:0.06em;text-transform:uppercase;}
+#jcw-quiz .r-name{font-family:'EB Garamond',Georgia,serif;font-size:2rem;font-weight:400;color:#14214b;line-height:1.2;margin-bottom:0.4rem;}
+#jcw-quiz .r-result-name{font-family:'EB Garamond',Georgia,serif;font-size:1.4rem;font-weight:400;font-style:italic;color:#14214b;margin-bottom:1.3rem;line-height:1.3;}
+#jcw-quiz .r-divider{border:none;border-top:1px solid rgba(169,155,148,0.35);margin:1.4rem 0;}
+#jcw-quiz .r-gift{font-size:15px;font-weight:500;color:#8b4513;margin-bottom:0.9rem;letter-spacing:0.01em;}
+#jcw-quiz .r-body{font-size:15px;font-weight:300;color:#14214b;line-height:1.75;margin-bottom:1.35rem;}
+#jcw-quiz .r-overlap{font-size:14px;font-weight:300;font-style:italic;color:#524941;border-left:2px solid #a99b94;padding-left:0.9rem;margin-bottom:2rem;line-height:1.6;}
+#jcw-quiz .optin-box{background:white;border:1px solid #e8e0cc;border-radius:2px;padding:1.75rem;}
+#jcw-quiz .optin-lbl{font-family:'EB Garamond',Georgia,serif;font-size:1.3rem;font-weight:400;color:#14214b;margin-bottom:0.6rem;}
+#jcw-quiz .optin-cta{font-size:17px;font-weight:300;color:#14214b;line-height:1.7;margin-bottom:1.5rem;}
+#jcw-quiz .field-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0.75rem;}
+#jcw-quiz .finput{flex:1;min-width:150px;padding:11px 14px;border:1px solid #e8e0cc;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;background:#fffbf0;color:#14214b;outline:none;transition:border-color 0.2s;}
+#jcw-quiz .finput:focus{border-color:#073c81;}
+#jcw-quiz .finput::placeholder{color:#524941;}
+#jcw-quiz .err-msg{font-size:12px;color:#9b2335;margin-top:0.25rem;display:none;}
+#jcw-quiz .ty-msg{font-family:'EB Garamond',Georgia,serif;font-size:1rem;font-style:italic;color:#073c81;margin-top:1rem;line-height:1.6;}
+#jcw-quiz .score-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid #e8e0cc;}
+#jcw-quiz .spill{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;padding:5px 12px;border:1px solid #e8e0cc;border-radius:20px;color:#524941;background:white;letter-spacing:0.02em;}
+#jcw-quiz .footer-mark{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e8e0cc;}
+#jcw-quiz .footer-rule{width:32px;height:1px;background:#f8d97e;margin:0 auto 0.75rem;}
+#jcw-quiz .footer-text{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:#524941;letter-spacing:0.05em;}
+@media(max-width:480px){
+  #jcw-quiz .hdr-title{font-size:1.6rem;}
+  #jcw-quiz .qcard{padding:1.5rem;}
+  #jcw-quiz .rcard{padding:1.5rem;}
+  #jcw-quiz .field-row{flex-direction:column;}
+  #jcw-quiz .finput{min-width:100%;}
+}
+</style>
+
+<div id="jcw-quiz">
+  <div class="wrap">
+    <div class="hdr">
+      <div class="hdr-rule"></div>
+      <div class="hdr-eyebrow">Nervous system + burnout assessment</div>
+      <div class="hdr-title">What's Depleting You?</div>
+      <div class="hdr-sub">12 questions &nbsp;·&nbsp; about 4 minutes</div>
+    </div>
+    <p style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:#524941;font-style:italic;line-height:1.7;text-align:center;margin-bottom:1.75rem;padding:0 0.5rem;">Choose the answer that most closely reflects your experience right now.<br>There are no wrong answers.</p>
+    <div id="jcw-root"></div>
+    <div class="footer-mark">
+      <div class="footer-rule"></div>
+      <div class="footer-text">Joyful, Calm, and Well, LLC &nbsp;·&nbsp; allisondurazo.com</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+const Qs=[
+  {text:"When someone asks you how you are, what's your honest internal response?",answers:[
+    {text:"Fine on the outside. Inside, I'm managing more than I show.",score:2,type:"H"},
+    {text:"Tired in a way I can't explain. It's deeper than lack of sleep.",score:4,type:"H"},
+    {text:"I feel mostly okay. Some stress, but nothing I can't handle.",score:1,type:"H"},
+    {text:"I don't actually know. I've stopped checking in with myself.",score:3,type:"H"}
+  ]},
+  {text:"How do you experience joy or pleasure these days?",answers:[
+    {text:"I feel genuine pleasure and enjoy the things that used to bring me joy.",score:1,type:"W"},
+    {text:"I still enjoy some things but it takes more effort than it used to.",score:2,type:"W"},
+    {text:"I go through the motions of enjoyable activities but don't really feel them.",score:3,type:"W"},
+    {text:"Most things feel flat or distant. I know I used to care about these things.",score:4,type:"W"}
+  ]},
+  {text:"How do you relate to rest right now?",answers:[
+    {text:"I plan to rest and then fill the time with more tasks anyway.",score:3,type:"F"},
+    {text:"I rest without guilt and feel restored by it.",score:1,type:"F"},
+    {text:"Rest feels impossible or threatening. I don't know who I am when I stop.",score:4,type:"F"},
+    {text:"I rest sometimes, but often feel guilty or like I should be doing something.",score:2,type:"F"}
+  ]},
+  {text:"When you finish a full day of caring for others, what happens in your body?",answers:[
+    {text:"I feel flat or numb. I go through the motions of evening but I'm not really present.",score:3,type:"W"},
+    {text:"I feel tired but satisfied. I can wind down and rest.",score:1,type:"H"},
+    {text:"I feel completely empty. My body aches, and I can't access much at all.",score:4,type:"H"},
+    {text:"I feel wired and restless — I can't seem to stop even when I want to.",score:2,type:"H"}
+  ]},
+  {text:"How closely does your internal state match what's visible on the outside?",answers:[
+    {text:"Pretty closely. What people see is usually what's actually happening for me.",score:1,type:"F"},
+    {text:"Sometimes there's a gap — I carry more than I show, but I'm aware of it.",score:2,type:"F"},
+    {text:"There's often a significant gap. I present as fine when something intense is happening inside.",score:3,type:"F"},
+    {text:"My outside and inside can feel completely unrelated — I can appear calm or capable while internally there's a hum of activation that never fully goes away.",score:4,type:"F"}
+  ]},
+  {text:"How connected do you feel to the people you care about most?",answers:[
+    {text:"I show up, but I'm often more distracted than I'd like to be.",score:2,type:"W"},
+    {text:"I've been pulling away. I don't have much left to give.",score:4,type:"W"},
+    {text:"Present and warm. I genuinely enjoy my relationships.",score:1,type:"W"},
+    {text:"I love them, but I often feel like I'm performing connection rather than feeling it.",score:3,type:"W"}
+  ]},
+  {text:"What happens in your body when you think about your to-do list?",answers:[
+    {text:"A low-grade tension settles in. It's familiar but not comfortable.",score:2,type:"H"},
+    {text:"I go numb or start moving automatically. It's easier not to feel it.",score:4,type:"H"},
+    {text:"A mild alertness. I feel capable and organized.",score:1,type:"H"},
+    {text:"My chest tightens or my stomach drops. I feel urgency I can't turn off.",score:3,type:"H"}
+  ]},
+  {text:"How often do you crash — physically, emotionally, or both — after a period of high output?",answers:[
+    {text:"Rarely. I manage my energy and recover well.",score:1,type:"F"},
+    {text:"Sometimes. I push too hard and need a day or two to recover.",score:2,type:"F"},
+    {text:"Often. I run high for a while and then hit a wall.",score:3,type:"F"},
+    {text:"It's a pattern. I've been cycling between overdrive and collapse for years.",score:4,type:"F"}
+  ]},
+  {text:"How do you respond when someone offers you genuine help or care?",answers:[
+    {text:"I minimize it, redirect it, or insist I'm fine.",score:3,type:"H"},
+    {text:"It makes me uncomfortable. I'd rather be the one giving.",score:4,type:"H"},
+    {text:"I receive it easily and feel grateful.",score:1,type:"H"},
+    {text:"I say thank you but often feel awkward or like I need to give back right away.",score:2,type:"H"}
+  ]},
+  {text:"When you have unstructured time — no agenda, no one needing you — how do you feel?",answers:[
+    {text:"Relieved and able to drop in. I enjoy the spaciousness.",score:1,type:"W"},
+    {text:"A little uncomfortable, but I can settle into it.",score:2,type:"W"},
+    {text:"Anxious or purposeless. I quickly fill it with something productive.",score:3,type:"F"},
+    {text:"Hollow. There's nothing pulling me toward anything.",score:4,type:"W"}
+  ]},
+  {text:"When you're in a difficult or high-demand situation, what happens inside?",answers:[
+    {text:"I respond proportionally and can usually find my footing.",score:1,type:"F"},
+    {text:"I notice I'm more activated than the situation probably warrants, but I can observe it and settle.",score:2,type:"F"},
+    {text:"I feel pulled in opposite directions at once — wanting to push through and wanting to escape simultaneously — and neither impulse wins.",score:3,type:"F"},
+    {text:"My reactions feel like they take over — bigger than I chose, faster than I could stop, and afterward I'm not entirely sure what happened.",score:4,type:"F"}
+  ]},
+  {text:"When you imagine six months from now — continuing at your current pace — how does that feel?",answers:[
+    {text:"Uncertain. Something needs to change but I'm not sure what.",score:2,type:"W"},
+    {text:"I try not to think about it. It feels too heavy.",score:4,type:"W"},
+    {text:"Sustainable. I feel okay about where I'm headed.",score:1,type:"W"},
+    {text:"Exhausting to think about. I don't know how I'll keep this up.",score:3,type:"F"}
+  ]}
+];
+
+const typeNames={H:"The Ever-Present",W:"The Quiet Holder",F:"The All-In"};
+const typeGifts={
+  H:"Your gift is devotion — the way you show up, fully, for the people and work you love.",
+  W:"Your gift is depth — the capacity to hold space, feel fully, and be present for others.",
+  F:"Your gift is wholehearted commitment — when you're in, you're completely in."
+};
+
+const Rs={
+  H0:{name:"In Full Flower",body:"Your nervous system is doing what it's meant to do — responding, recovering, and returning to ease. You show up fully for the people and work you love, and you've developed enough capacity to receive care in return. That balance is rarer than it sounds, especially for someone wired the way you are. What you have is worth tending. This is what thriving looks like for someone wired the way you are.",overlap:"",cta:"If you're interested in sustaining this over the long term — and going even deeper into what makes you work well — 1:1 work focused on optimization rather than recovery may be exactly the right fit for you.",cls:"th",sev:"Thriving"},
+  W0:{name:"Rooted",body:"You're connected — to yourself, to others, to what matters. The inward quality that can sometimes tip into withdrawal is, at this moment, working in your favor. You feel things fully and you're not depleted by it. That's a genuine accomplishment for someone with your capacity for depth. The work now is less about recovery and more about knowing what keeps you here so you can optimize for longevity. This is what thriving looks like for someone with your capacity for depth.",overlap:"",cta:"If you want to understand your own patterns and how to stay in this place, I can help you learn to recognize the early signals before things start to shift.",cls:"tw",sev:"Thriving"},
+  F0:{name:"Fully Alive",body:"You're operating from genuine energy right now, not momentum or obligation. The push-crash cycle that can develop for someone with your level of commitment isn't your current reality — you're moving hard and coming back to center. That's the sweet spot. It doesn't happen by accident. This is what thriving looks like for someone with your level of drive.",overlap:"",cta:"If you want to understand the specific conditions that keep you here — so you can protect them and build on them — I'd love to think through that with you.",cls:"tf",sev:"Thriving"},
+  H1:{name:"On Alert",body:"Something has been running quietly in the background for a while now — and your body is starting to feel it. You're functioning well from the outside, but your nervous system has been running a quiet program of vigilance. You rest, but don't fully land. You give, but don't fully receive. These are early signals. Your body is pointing to what needs attention to prevent further depletion.",overlap:"Many people who land here also recognize themselves in The Quiet Holder — especially if the flatness of over-giving has started to settle in.",cta:"Want to understand what your nervous system is actually doing — and how to work with it? Download the free burnout guide.",cls:"th",sev:"Emerging"},
+  H2:{name:"The Hidden Load",body:"You've been carrying more than anyone can see — and you've gotten very good at it. So good that most people don't know how much you're holding. Your nervous system is activated more than it's at ease, and your body has adapted by treating chronic tension as a normal state. You're not falling apart. You're running a system that was never designed to work this hard for this long.",overlap:"If the push-crash cycle also feels familiar, you may carry threads of The All-In as well. Many Ever-Presents do.",cta:"Your results suggest your nervous system has been in overdrive for a while. The guide walks through what that actually means — and what helps.",cls:"th",sev:"Established"},
+  H3:{name:"Running on Fumes",body:"Your system has been working overtime for a long time — and you are giving from a place of deep depletion. Your nervous system has been in near-constant activation — alert, scanning, responding — for so long that it may feel like who you are rather than what you're doing. Receiving help may feel uncomfortable or impossible. Rest may feel threatening. But this is not a willpower issue. This is a body-level pattern, and it is workable.",overlap:"At this depth, The Quiet Holder pattern often lives underneath. The withdrawal and flatness can develop as the body's protection when activation has run too long.",cta:"Your results point to deep nervous system depletion. This is real, it's specific, and there is a path through it. Start with the guide — or reach out directly.",cls:"th",sev:"Deep"},
+  W1:{name:"Fading Edges",body:"Something has gotten quieter in you — and it's worth noticing. Things still feel okay in many ways, but there's a low-level flatness that wasn't there before. You may find yourself less moved by things that used to matter, or going through familiar motions without the feelings that used to accompany them. This is an early signal from your nervous system that it's beginning to run out of resources. Noticing this pattern early gives you an opportunity to shift things so you can avoid burnout.",overlap:"Many Quiet Holders also recognize The Ever-Present in themselves — the giving without receiving often comes first, and the quiet follows.",cta:"Curious what's happening beneath the surface? The guide includes a section on nervous system withdrawal — what it is and how to gently reverse it.",cls:"tw",sev:"Emerging"},
+  W2:{name:"Going Through the Motions",body:"You're present in body — but the rest of you has stepped back. You show up. You do the work. You care for people. But there's a gap between where your body is and where you feel. Your nervous system has shifted into a conservation mode that is physiologically protective and emotionally costly. You may wonder if something is wrong with you. Nothing is wrong. Your system is doing what systems do when they've been asked to give more than they've received.",overlap:"This pattern is often misread as depression. If relentless doing is also part of your history, you may recognize The All-In underneath the quiet.",cta:"Your results describe a specific nervous system pattern common among caregivers and healers — and often misread as depression. The guide breaks it down.",cls:"tw",sev:"Established"},
+  W3:{name:"The Long Quiet",body:"Your body has been protecting you for a long time — and it's tired. You have adapted, at great cost, to a life of giving without enough return. Your nervous system has shifted into a deep holding pattern: conserving, withdrawing, minimizing. What looks like apathy from the outside is your system doing its best to survive chronic depletion. This is not who you are. It is what prolonged over-giving does to a body. Recovery is possible.",overlap:"Most people here carry all three patterns at some point in their history. The Ever-Present and The All-In often lead to this place over time.",cta:"This level of depletion deserves more than a guide. I'd love to support you directly — and the guide is a good place to start.",cls:"tw",sev:"Deep"},
+  F1:{name:"First Cracks",body:"You're achieving — and it's starting to cost you. You're productive, capable, and driven, and you may begin to notice that recovery time after intense periods of activity are getting longer. Rest may be uncomfortable. Your identity and output may be closely linked. This is the beginning of a pattern worth interrupting because you actually live in a body that doesn't have to earn its worth.",overlap:"Many All-Ins also recognize The Ever-Present in themselves — the devotion and the drive often travel together.",cta:"Curious about the connection between identity, productivity, and nervous system health? The guide has a chapter written for exactly where you are.",cls:"tf",sev:"Emerging"},
+  F2:{name:"The Push-Crash Cycle",body:"You've been running hard — and the crashes are telling you something. You live in a familiar rhythm: push hard, crash, recover just enough, push again. You're not unaware of it — you probably see it clearly. What may be harder to see is that the crashes aren't a failure of discipline. They are a nervous system resetting after being asked to operate above its sustainable window for extended periods. The cycle resolves by working with your physiology, not against it.",overlap:"If the flatness of The Quiet Holder also resonates, that may be what the crash phase looks like in your body — withdrawal as recovery.",cta:"The guide includes a section on the push-crash cycle — what drives it neurologically and how to start interrupting it.",cls:"tf",sev:"Established"},
+  F3:{name:"Identity on the Line",body:"You've been proving your worth for a long time — and your body is done. Somewhere along the way, stopping became the same thing as failing. Your nervous system has been co-opted by a story that your value is your output. The crashes are longer now. The recoveries are incomplete. You may be beginning to question things that felt certain — your purpose, your capacity, your sense of self outside of doing. That questioning is not a breakdown. It is the beginning of something more honest.",overlap:"At this depth, all three patterns are usually present. The Ever-Present's devotion, The All-In's drive, and The Quiet Holder's withdrawal in the aftermath.",cta:"This is a significant moment. The guide is a real place to start — and I also offer individual work for people exactly here.",cls:"tf",sev:"Deep"}
+};
+
+const PODIA="https://allison9.podia.com/email_lists/1202381/subscriptions";
+let cur=0,ans=new Array(12).fill(null),done=false;
+
+function getResult(){
+  const total=ans.reduce((s,a)=>s+a.score,0);
+  const ts={H:0,W:0,F:0};
+  ans.forEach(a=>ts[a.type]+=a.score);
+  const type=Object.entries(ts).sort((a,b)=>b[1]-a[1])[0][0];
+  const sev=total<=19?0:total<=29?1:total<=39?2:3;
+  return{key:type+sev,total,ts,type,sev};
+}
+
+async function podiaSubmit(name,email){
+  const fd=new FormData();
+  fd.append('name',name);
+  fd.append('email',email);
+  try{await fetch(PODIA,{method:'POST',body:fd,mode:'no-cors'});}catch(e){}
+  return true;
+}
+
+function render(){
+  const root=document.getElementById('jcw-root');
+  if(cur<12){
+    const q=Qs[cur];
+    const sel=ans[cur];
+    const pct=Math.round((cur/12)*100);
+    root.innerHTML=`
+      <div class="prog-wrap">
+        <div class="prog-meta"><span>Question ${cur+1} of 12</span><span>${pct}%</span></div>
+        <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="qcard">
+        <div class="qnum">Question ${cur+1}</div>
+        <div class="qtext">${q.text}</div>
+        <div class="alist">
+          ${q.answers.map((a,i)=>`<button class="abtn${sel===a?' sel':''}" onclick="jcwPick(${i})">${a.text}</button>`).join('')}
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn btn-ghost" onclick="jcwBack()" ${cur===0?'disabled':''}>&#8592; Back</button>
+        <button class="btn btn-primary" onclick="jcwNext()" ${!sel?'disabled':''}>${cur===11?'See my results &#8594;':'Next &#8594;'}</button>
+      </div>`;
+  } else {
+    const {key,total,ts,type,sev}=getResult();
+    const r=Rs[key];
+    root.innerHTML=`
+      ${sev>0?`<div class="disc-box"><div class="disc-text">These patterns overlap. Most people carry more than one. This result reflects your most dominant pattern right now.</div></div>`:''}
+      <div class="rcard ${r.cls}">
+        <div class="r-identity-block">
+          <div class="r-identity-line">Your Pattern: <span>${typeNames[type]}</span></div>
+          ${sev>0?`<div class="r-identity-line">Level of depletion: <span>${r.sev}</span></div>`:''}
+        </div>
+        <div class="r-result-name">${r.name}</div>
+        <hr class="r-divider">
+        <div class="r-gift">${typeGifts[type]}</div>
+        <div class="r-body">${r.body}</div>
+        ${r.overlap?`<div class="r-overlap">${r.overlap}</div>`:''}
+        ${!done?`
+        <div class="optin-box">
+          <div class="optin-lbl">${sev===0?"Interested in going further?":"Want to go deeper?"}</div>
+          ${sev>0?`<div style="font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:500;color:#14214b;margin-bottom:0.5rem;">Get the full nervous system recovery guide.</div>`:''}
+          <div class="optin-cta">${r.cta}</div>
+          <div class="field-row">
+            <input class="finput" style="max-width:160px" type="text" id="jcw-fn" placeholder="First name" />
+            <input class="finput" type="email" id="jcw-fe" placeholder="your@email.com" />
+            <button class="btn btn-primary" id="jcw-sb" onclick="jcwSub()">Send me the guide</button>
+          </div>
+          <div id="jcw-em" class="err-msg">Please enter a valid email address.</div>
+        </div>`:`
+        <div class="ty-msg">Thank you — check your inbox. With joy, Allison.</div>`}
+        <div class="score-row">
+          <div style="width:100%;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:#524941;font-style:italic;margin-bottom:0.5rem;line-height:1.6;text-align:center;">Your three pattern scores — your result reflects the dominant one, but your secondary score may feel familiar too.</div>
+          <span class="spill">Total: ${total}/48</span>
+          <span class="spill">Ever-Present: ${ts.H}</span>
+          <span class="spill">Quiet Holder: ${ts.W}</span>
+          <span class="spill">All-In: ${ts.F}</span>
+        </div>
+      </div>`;
+  }
+}
+
+window.jcwPick=function(i){ans[cur]=Qs[cur].answers[i];render();};
+window.jcwNext=function(){if(cur<12){cur++;render();}};
+window.jcwBack=function(){if(cur>0){cur--;render();}};
+window.jcwSub=async function(){
+  const email=document.getElementById('jcw-fe').value.trim();
+  const name=document.getElementById('jcw-fn').value.trim();
+  const em=document.getElementById('jcw-em');
+  if(!email||!email.includes('@')){em.style.display='block';return;}
+  em.style.display='none';
+  const sb=document.getElementById('jcw-sb');
+  sb.textContent='Sending...';
+  sb.disabled=true;
+  await podiaSubmit(name,email);
+  done=true;
+  render();
+};
+
+render();
+})();
+</script>

@@ -232,7 +232,7 @@ function render(){
       <div class="rcard ${r.cls}">
         <div class="r-identity-block">
           <div class="r-identity-line">Your Pattern: <span>${typeNames[type]}</span></div>
-          ${sev>0?`<div class="r-identity-line">Level of depletion: <span>${r.sev}</span></div>`:''}
+          <div class="r-identity-line">Current Status: <span>${r.sev}</span></div>
         </div>
         <div class="r-result-name">${r.name}</div>
         <hr class="r-divider">

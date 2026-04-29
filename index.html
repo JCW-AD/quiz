@@ -182,8 +182,7 @@ const Rs={
   F3:{name:"Identity on the Line",body:"You've been proving your worth for a long time — and your body is done. Somewhere along the way, stopping became the same thing as failing. Your nervous system has been co-opted by a story that your value is your output. The crashes are longer now. The recoveries are incomplete. You may be beginning to question things that felt certain — your purpose, your capacity, your sense of self outside of doing. That questioning is not a breakdown. It is the beginning of something more honest.",overlap:"At this depth, all three patterns are usually present. The Ever-Present's devotion, The All-In's drive, and The Quiet Holder's withdrawal in the aftermath.",cta:"This is a significant moment. The guide is a real place to start — and I also offer individual work for people exactly here.",cls:"tf",sev:"Deep"}
 };
 
-const PODIA="https://allison9.podia.com/email_lists/1202381/subscriptions";
-let cur=0,ans=new Array(12).fill(null),done=false;
+let cur=0,ans=new Array(12).fill(null);
 
 function getResult(){
   const total=ans.reduce((s,a)=>s+a.score,0);
@@ -194,13 +193,6 @@ function getResult(){
   return{key:type+sev,total,ts,type,sev};
 }
 
-async function podiaSubmit(name,email){
-  const fd=new FormData();
-  fd.append('name',name);
-  fd.append('email',email);
-  try{await fetch(PODIA,{method:'POST',body:fd,mode:'no-cors'});}catch(e){}
-  return true;
-}
 
 function render(){
   const root=document.getElementById('jcw-root');
@@ -239,19 +231,7 @@ function render(){
         <div class="r-gift">${typeGifts[type]}</div>
         <div class="r-body">${r.body}</div>
         ${r.overlap?`<div class="r-overlap">${r.overlap}</div>`:''}
-        ${!done?`
-        <div class="optin-box">
-          <div class="optin-lbl">${sev===0?"Interested in going further?":"Want to go deeper?"}</div>
-          ${sev>0?`<div style="font-family:'EB Garamond',Georgia,serif;font-size:1.05rem;font-weight:500;color:#14214b;margin-bottom:0.5rem;">Get the full nervous system recovery guide.</div>`:''}
-          <div class="optin-cta">${r.cta}</div>
-          <div class="field-row">
-            <input class="finput" style="max-width:160px" type="text" id="jcw-fn" placeholder="First name" />
-            <input class="finput" type="email" id="jcw-fe" placeholder="your@email.com" />
-            <button class="btn btn-primary" id="jcw-sb" onclick="jcwSub()">Send me the guide</button>
-          </div>
-          <div id="jcw-em" class="err-msg">Please enter a valid email address.</div>
-        </div>`:`
-        <div class="ty-msg">Thank you — check your inbox. With joy, Allison.</div>`}
+        <div class="ty-msg">Thank you for taking the quiz. Check your email now for your guide — it explains your pattern and includes a short practice designed specifically for how your nervous system works. With joy, Allison.</div>
         <div class="score-row">
           <div style="width:100%;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:#524941;font-style:italic;margin-bottom:0.5rem;line-height:1.6;text-align:center;">Your three pattern scores — your result reflects the dominant one, but your secondary score may feel familiar too.</div>
           <span class="spill">Total: ${total}/48</span>
@@ -266,19 +246,6 @@ function render(){
 window.jcwPick=function(i){ans[cur]=Qs[cur].answers[i];render();};
 window.jcwNext=function(){if(cur<12){cur++;render();}};
 window.jcwBack=function(){if(cur>0){cur--;render();}};
-window.jcwSub=async function(){
-  const email=document.getElementById('jcw-fe').value.trim();
-  const name=document.getElementById('jcw-fn').value.trim();
-  const em=document.getElementById('jcw-em');
-  if(!email||!email.includes('@')){em.style.display='block';return;}
-  em.style.display='none';
-  const sb=document.getElementById('jcw-sb');
-  sb.textContent='Sending...';
-  sb.disabled=true;
-  await podiaSubmit(name,email);
-  done=true;
-  render();
-};
 
 render();
 })();
